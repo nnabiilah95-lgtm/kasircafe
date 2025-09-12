@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [AuthLoginController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthLoginController::class, 'login']);
-Route::post('/logout', [AuthLoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Role views
 Route::middleware(['auth', 'checkrole:administrator'])->get('/administrator', function () {

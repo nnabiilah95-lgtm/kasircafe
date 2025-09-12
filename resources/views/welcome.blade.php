@@ -15,7 +15,8 @@
         }
 
         .bg-cover {
-            background: url('http://127.0.0.1:8000/images/bg-coffe.jpg') no-repeat center center;
+            background: url(http://127.0.0.1:8000/images/bg-nescafe.jpg
+) no-repeat center center;
             background-size: cover;
             height: 100vh;
         }
@@ -46,7 +47,7 @@
     <div class="bg-cover">
         <div class="overlay">
             <div>
-                <h1 class="display-4 fw-bold">Welcome to Kasir Nescaffe</h1>
+                <h1 class="display-4 fw-bold">Welcome to Kasir Nescaffé</h1>
                 <p class="lead">Sistem Kasir Café yang Simple & Efisien</p>
                 <a href="{{ url('/login') }}" class="btn btn-lg btn-custom text-white mt-3">Login</a>
                 <a href="{{ url('/dashboard') }}" class="btn btn-lg btn-custom text-white mt-3">Masuk Dashboard</a>

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\StokController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,6 +15,10 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
+Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+Route::get('/stok', [StokController::class, 'index'])->name('stok');
 
 // Role views
 Route::middleware(['auth', 'checkrole:administrator'])->get('/administrator', function () {

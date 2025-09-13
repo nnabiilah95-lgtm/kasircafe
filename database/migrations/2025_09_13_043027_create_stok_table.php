@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('stok', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('kategori');
-            $table->integer('harga');
-            $table->integer('stok')->default(0);
+            $table->unsignedBigInteger('menu_id');
+            $table->enum('jenis', ['masuk', 'keluar']); // masuk = tambah stok, keluar = pengurangan
+            $table->integer('jumlah');
+            $table->string('keterangan')->nullable();            
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu');
+        Schema::dropIfExists('stok');
     }
 };

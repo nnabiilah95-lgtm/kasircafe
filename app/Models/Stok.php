@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Produk; 
 
-class Stock extends Model {
+class Stok extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'menu_id',
+        'produk_id',
         'jenis',
         'jumlah',
         'keterangan'
     ];
 
-    public function product() {
-        return $this->belongsTo(Product::class);
+    public function produk() {
+        return $this->belongsTo(Produk::class);
     }
 }

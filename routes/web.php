@@ -15,9 +15,14 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
-Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+
+Route::resource('produk', ProdukController::class);
+
+Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
 
 // Role views

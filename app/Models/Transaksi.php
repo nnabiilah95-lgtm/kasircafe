@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\ProdukController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model {
+class Transaksi extends Model
+{
     use HasFactory;
 
-    protected $fillable = ['tanggal','menu_id','jumlah','total','status'];
+    // kasih tau Laravel nama tabel yang dipakai
+    protected $table = 'transaksi'; 
 
-    public function product() {
-        return $this->belongsTo(ProdukController::class);
-    }
+    protected $fillable = [
+        'produk_id',
+        'jumlah',
+        'total_harga',
+    ];
 }

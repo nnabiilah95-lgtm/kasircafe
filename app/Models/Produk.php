@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\TransaksiController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model {
+class Produk extends Model
+{
     use HasFactory;
+
+    // kasih tahu Laravel tabel yang dipakai
+    protected $table = 'produk';
 
     protected $fillable = [
         'kode_barang',
@@ -17,7 +20,8 @@ class Product extends Model {
         'foto'
     ];
 
-    public function transactions() {
-        return $this->hasMany(TransaksiController::class);
+    public function stoks()
+    {
+        return $this->hasMany(Stok::class);
     }
 }

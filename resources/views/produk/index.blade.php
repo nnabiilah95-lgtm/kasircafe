@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="container mt-4">
-    <h3 class="mb-4">Daftar Produk - Kasir Nescaffe</h3>
+    <h3 class="mb-4">Daftar Produk</h3>
+
+    <!-- Pesan sukses -->
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
     <!-- Tombol tambah produk -->
     <div class="mb-3">
@@ -24,22 +29,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($produk as $produk)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $produk->kode_barang }}</td>
-                            <td>{{ $produk->nama_produk }}</td>
-                            <td>{{ $produk->kategori }}</td>
-                            <td>{{ $produk->harga }}</td>
-                            <td>
-                                <img src="{{ asset('storage/'.$produk->foto) }}" width="50" height="50">
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-                            </td>
-                        </tr>
-                    @endforeach
+                   @foreach ($produk as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->kode_barang }}</td>
+                                    <td>{{ $item->nama_produk }}</td>
+                                    <td>{{ $item->kategori }}</td>
+                                    <td>{{ $item->harga }}</td>
+                                    <td>
+                                        @if($item->foto_produk)
+                                            <img src="{{ asset('storage/' . $item->foto_produk) }}" width="50" height="50">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                        <form action="{{ route('produk.destroy', $item->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin hapus produk ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                 </tbody>
             </table>
         </div>

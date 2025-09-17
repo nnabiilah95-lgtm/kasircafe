@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kode_barang')->unique();
             $table->string('nama_produk');
             $table->string('kategori');
-            $table->decimal('harga', 10, 2);
+            $table->decimal('harga', 12, 5);
             $table->string('foto')->nullable(); 
             $table->timestamps();
         });

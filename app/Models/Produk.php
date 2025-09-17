@@ -20,8 +20,18 @@ class Produk extends Model
         'foto'
     ];
 
-    public function stoks()
+    public function stok()
     {
-        return $this->hasMany(Stok::class);
+        return $this->hasMany(Stok::class, 'menu_id'); 
+        // kalau foreign key di migration pakai menu_id
+        // kalau pakai produk_id → ganti jadi 'produk_id'
+    }
+
+    // Hitung total stok otomatis
+    public function getTotalStokAttribute()
+    {
+        $masuk = $this->stok()->where('jenis', 'masuk')->sum('jumlah');
+        $keluar = $this->stok()->where('jenis', 'keluar')->sum('jumlah');
+        return $masuk - $keluar;
     }
 }

@@ -51,22 +51,21 @@ class ProdukController extends Controller
 
     public function update(Request $request, Produk $produk)
     {
-        $request->validate([
-            'nama_produk' => 'required',
-            'kategori'    => 'nullable',
-            'harga'       => 'required|numeric',
-            'foto_produk' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+         $request->validate([
+        'kode_barang' => 'required|unique:produk,kode_barang,' . $produk->id,
+        'nama_produk' => 'required',
+        'kategori'    => 'nullable',
+        'harga'       => 'required|numeric',
+        'stok'        => 'nullable|numeric',
+        'foto_produk' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        $data = $request->only(['kode_barang', 'nama_produk', 'kategori', 'harga']);
+    $data = $request->only(['kode_barang', 'nama_produk', 'kategori', 'harga', 'stok']);
 
-        if ($request->hasFile('foto_produk')) {
-            $data['foto_produk'] = $request->file('foto_produk')->store('produk', 'public');
-        }
+    // Update data produk
+    $produk->update($data);
 
-        $produk->update($data);
-
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui');
+    return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui');
     }
 
     public function destroy(Produk $produk)

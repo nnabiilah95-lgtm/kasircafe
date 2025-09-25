@@ -9,7 +9,7 @@
         <label for="produk" class="form-label">Pilih Produk:</label>
         <select id="produk" class="form-select">
             <option value="">-- Pilih Produk --</option>
-            @foreach($produks as $produk)
+            @foreach($produk as $produk)
                 <option value="{{ $produk->id }}"
                         data-harga="{{ $produk->harga }}">
                     {{ $produk->nama_produk }} - Rp{{ number_format($produk->harga, 0, ',', '.') }}

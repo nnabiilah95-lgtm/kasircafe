@@ -25,6 +25,7 @@ Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
 Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
 Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
 Route::get('/produk', [ProdukController::class, 'edit'])->name('produk.edit');
+Route::get('/produk', [ProdukController::class, 'show'])->name('produk.show');
 
 
 Route::resource('produk', ProdukController::class);

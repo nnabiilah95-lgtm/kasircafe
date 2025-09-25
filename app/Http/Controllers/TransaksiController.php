@@ -10,15 +10,15 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        $produks = Produk::all();
+        $produk = Produk::all();
         $transaksi = Transaksi::with('produk')->get();
-        return view('transaksi.index', compact('produks', 'transaksi'));
+        return view('transaksi.index', compact('produk', 'transaksi'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produks,id',
+            'produk_id' => 'required|exists:produk,id',
             'jumlah'    => 'required|integer|min:1',
         ]);
 

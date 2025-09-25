@@ -77,18 +77,7 @@
             </a>
           </li>
 
-          <!-- Logout -->
-          <li>
-            <div class="d-grid px-2 pt-2 pb-1">
-              <a
-                class="btn btn-sm btn-danger d-flex align-items-center"
-                href="auth-login-cover.html"
-              >
-                <small class="align-middle">Logout</small>
-                <i class="ti ti-logout ms-2 ti-14px"></i>
-              </a>
-            </div>
-          </li>
+         
         </ul>
       </li>
       <!-- /User Dropdown -->

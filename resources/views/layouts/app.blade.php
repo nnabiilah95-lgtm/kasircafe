@@ -69,7 +69,7 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-2 sidebar p-3">
-                <img src="{{ asset('images/logo.nes.remove1.png') }}" width="250" height="80" <ul
+                <img src="{{ asset('images/logo.nes.remove1.png') }}" width="200" height="55" <ul
                     class="nav flex-column mt-4">
                 <li class="nav-item"><a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                         href="/dashboard">🏠 Dashboard</a></li>
@@ -84,7 +84,7 @@
                 <div class="logout text-center">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger w-50">
+                        <button type="submit" class="btn btn-danger w-30">
                             🚪 Logout
                         </button>
                     </form>

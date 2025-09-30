@@ -6,6 +6,7 @@ use App\Models\Transaksi;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 
+
 class TransaksiController extends Controller
 {
     public function index()
@@ -17,20 +18,25 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'produk_id' => 'required|exists:produk,id',
-            'jumlah'    => 'required|integer|min:1',
-        ]);
+    // Simpan transaksi ke database
+    $transaksi = Transaksi::create([
+        'total_harga' => $request->total_harga,
+        'uang_bayar' => $request->uang_bayar,
+        'kembalian' => $request->uang_bayar - $request->total_harga,
+    ]);
 
-        $produk = Produk::findOrFail($request->produk_id);
-        $subtotal = $produk->harga * $request->jumlah;
+    // Redirect ke halaman sukses
+     return redirect()->route('transaksi.nota', $transaksi->id);
 
-        Transaksi::create([
-            'produk_id' => $produk->id,
-            'jumlah'    => $request->jumlah,
-            'subtotal'  => $subtotal,
-        ]);
 
-        return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil ditambahkan!');
-    }
+}
+
+public function nota($id)
+{
+    $transaksi = Transaksi::findOrFail($id);
+
+    return view('transaksi.nota', compact('transaksi'));
+}
+
+
 }

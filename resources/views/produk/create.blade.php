@@ -20,6 +20,18 @@
           <input type="text" name="nama_produk" class="form-control" required>
         </div>
 
+        <!-- Tambahan kategori -->
+        <div class="mb-3">
+          <label for="kategori" class="form-label">Kategori</label>
+          <select name="kategori" id="kategori" class="form-select" required>
+            <option value="">-- Pilih Kategori --</option>
+            <option value="Makanan">Makanan</option>
+            <option value="Minuman">Minuman</option>
+            <option value="Elektronik">Elektronik</option>
+            <option value="Fashion">Fashion</option>
+          </select>
+        </div>
+
         <div class="mb-3">
           <label for="harga" class="form-label">Harga</label>
           <input type="number" name="harga" class="form-control" required>

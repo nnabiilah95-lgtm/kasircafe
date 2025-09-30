@@ -22,10 +22,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($menus as $i => $m)
+            @foreach($stok as $i => $m)
             <tr>
                 <td>{{ $i+1 }}</td>
-                <td>{{ $m->nama }}</td>
+                <td>{{ $item->produk->nama_produk ?? '-' }}</td>
                 <td>{{ $m->total_stok }}</td>
                 <td>
                     @if($m->total_stok > 10)

@@ -8,29 +8,32 @@ use Illuminate\Http\Request;
 
 class StokController extends Controller
 {
-    public function index()
-    {
-        $menus = Produk::with('stok')->get();
-        return view('stok.index', compact('menus'));
-    }
+   public function index()
+{
+    $stok = Stok::with('produk')->get();
+    return view('stok.index', compact('stok'));
+}
 
     public function create()
-    {
-        $menus = Produk::all();
-        return view('stok.create', compact('menus'));
-    }
+{
+   $produk = Produk::all();
+return view('stok.create', compact('produk'));
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'menu_id' => 'required|exists:menus,id',
-            'jenis' => 'required|in:masuk,keluar',
-            'jumlah' => 'required|integer|min:1',
-            'keterangan' => 'nullable|string|max:255',
-        ]);
+}
 
-        StokController::create($data);
+   public function store(Request $request)
+{
+    $request->validate([
+        'produk_id' => 'required|exists:produk,id',
+        'total_stok' => 'required|integer|min:0',
+    ]);
 
-        return redirect()->route('stok.index')->with('success','Data stok berhasil ditambahkan');
-    }
+    Stok::create([
+        'produk_id' => $request->produk_id,
+        'total_stok' => $request->total_stok,
+    ]);
+
+   return redirect()->route('stok.index')->with('success', 'Stok berhasil ditambahkan');
+
+}
 }

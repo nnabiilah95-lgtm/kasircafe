@@ -68,13 +68,11 @@
 
         {{-- Foto Produk --}}
         <div class="mb-3">
-          <label for="foto_produk" class="form-label">Foto Produk</label>
-          <input type="file" name="foto_produk" id="foto_produk" 
-                 class="form-control @error('foto_produk') is-invalid @enderror">
-          @error('foto_produk')
-            <div class="invalid-feedback">{{ $message }}</div>
-          @enderror
-
+             @if ($produk->foto_produk)
+                        <img src="{{ asset('images/' . $produk->foto_produk) }}" width="80">
+                    @else
+                        <small class="text-muted">No Image</small>
+                    @endif
          
             </div>
         </div>

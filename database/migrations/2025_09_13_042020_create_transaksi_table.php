@@ -9,16 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('transaksi', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('produk_id')->constrained('produk')->onDelete('cascade');
-            $table->integer('jumlah');
-            $table->integer('subtotal');
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('transaksi', function (Blueprint $table) {
+    $table->id();
+    $table->integer('total_harga');
+    $table->integer('uang_bayar');
+    $table->integer('kembalian');
+    $table->timestamps();
+});
+
+}
+
 
     /**
      * Reverse the migrations.

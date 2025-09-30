@@ -7,17 +7,19 @@
 <div class="container">
     <h2>Tambah Data Stok</h2>
 
+    
+
     <form action="{{ route('stok.store') }}" method="POST">
         @csrf
         <div class="mb-3">
-            <label>Menu</label>
-            <select name="menu_id" class="form-select" required>
-                <option value="">-- Pilih Menu --</option>
-                @foreach($menus as $m)
-                <option value="{{ $m->id }}">{{ $m->nama }}</option>
-                @endforeach
-            </select>
-        </div>
+    <label for="produk_id" class="form-label">Produk</label>
+    <select name="produk_id" class="form-control" required>
+        <option value="">-- Pilih Produk --</option>
+        @foreach($produk as $produk)
+            <option value="{{ $produk->id }}">{{ $produk->nama_produk }}</option>
+        @endforeach
+    </select>
+</div>
 
         <div class="mb-3">
             <label>Jenis</label>

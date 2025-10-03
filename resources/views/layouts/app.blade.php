@@ -18,7 +18,6 @@
             color: white;
             display: flex;
             flex-direction: column;
-            /* biar vertikal */
         }
 
         .sidebar h4 {
@@ -41,7 +40,6 @@
 
         .logout {
             margin-top: auto;
-            /* otomatis ke bawah */
             padding: 10px;
         }
 
@@ -69,16 +67,24 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-2 sidebar p-3">
-                <img src="{{ asset('images/logo.nes.remove1.png') }}" width="250" height="80" <ul
-                    class="nav flex-column mt-4">
-                <li class="nav-item"><a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
-                        href="/dashboard">🏠 Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->is('produk') ? 'active' : '' }}" href="/produk">📦
-                        Menu</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}"
-                        href="/transaksi">💳 Transaksi</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->is('stok') ? 'active' : '' }}" href="/stok">📊
-                        Stok</a></li>
+                <img src="{{ asset('images/logo.nes.remove1.png') }}" width="250" height="80">
+
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="/dashboard">🏠 Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('produk') ? 'active' : '' }}" href="/produk">📦 Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}" href="/transaksi">💳 Transaksi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('stok') ? 'active' : '' }}" href="/stok">📊 Stok</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('laporan') ? 'active' : '' }}" href="/laporan">📑 Laporan</a>
+                    </li>
                 </ul>
 
                 <div class="logout text-center">
@@ -111,6 +117,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>

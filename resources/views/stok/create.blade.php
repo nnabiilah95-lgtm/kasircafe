@@ -30,9 +30,10 @@
         </div>
 
         <div class="mb-3">
-            <label>Jumlah</label>
-            <input type="number" name="jumlah" class="form-control" min="1" required>
+            <label for="jumlah" class="form-label">Jumlah</label>
+            <input type="number" name="jumlah" class="form-control" required>
         </div>
+
 
         <div class="mb-3">
             <label>Keterangan</label>

@@ -9,17 +9,18 @@ class Transaksi extends Model
 {
     use HasFactory;
 
-    // kasih tau Laravel nama tabel yang dipakai
-    protected $table = 'transaksi'; 
+     protected $table = "transaksi";
 
     protected $fillable = [
+        'produk_id',
+        'kode_invoice',
         'total_harga',
         'uang_bayar',
         'kembalian',
-        
-
-        
-        
-
     ];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class);
+    }
 }

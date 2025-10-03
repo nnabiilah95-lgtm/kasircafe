@@ -11,7 +11,13 @@ class Stok extends Model
     use HasFactory;
 
     // kasih tau Laravel nama tabelnya
-     protected $fillable = ['produk_id', 'total_stok'];
+     protected $fillable = [
+    'produk_id',
+    'jenis',
+    'jumlah',
+    'keterangan'
+];
+
      protected $table = 'stok';
 
 

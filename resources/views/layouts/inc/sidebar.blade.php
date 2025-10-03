@@ -54,5 +54,12 @@
                 Transaksi
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{ route('laporan.index') }}" 
+            class="menu-link {{ request()->is('laporan') ? 'active' : '' }}">
+                <i class="menu-icon tf-icons ti ti-clipboard-data"></i>
+                Laporan
+            </a>
+        </li>
     </ul>
 </aside>

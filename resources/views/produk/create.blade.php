@@ -25,10 +25,8 @@
           <label for="kategori" class="form-label">Kategori</label>
           <select name="kategori" id="kategori" class="form-select" required>
             <option value="">-- Pilih Kategori --</option>
-            <option value="Makanan">Makanan</option>
             <option value="Minuman">Minuman</option>
-            <option value="Elektronik">Elektronik</option>
-            <option value="Fashion">Fashion</option>
+            
           </select>
         </div>
 

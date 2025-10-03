@@ -13,6 +13,8 @@ return new class extends Migration
 {
     Schema::create('transaksi', function (Blueprint $table) {
     $table->id();
+    $table->unsignedBigInteger('produk_id');
+    $table->string('kode_invoice')->unique();
     $table->integer('total_harga');
     $table->integer('uang_bayar');
     $table->integer('kembalian');

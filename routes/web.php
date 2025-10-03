@@ -34,7 +34,10 @@ Route::resource('produk', ProdukController::class);
 
 
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
+Route::get('/transaksi/nota/{id}', [TransaksiController::class, 'nota'])->name('transaksi.nota');
+Route::resource('transaksi', TransaksiController::class);
+
 
 Route::resource('stok/index/create/store', StokController::class)->only(['index','create','store']);
 Route::get('/stok', [StokController::class, 'index'])->name('stok.index');

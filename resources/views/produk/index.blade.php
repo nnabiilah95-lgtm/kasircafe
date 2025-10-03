@@ -37,13 +37,14 @@
                                 <td>{{ $produk->kategori }}</td>
                                 <td>{{ number_format($produk->harga, 2) }}</td>
                                 <td>
-                                    @if($produk->foto)
-                                        <img src="{{ asset('storage/' . $produk->foto) }}" alt="Foto Produk" width="80">
-
-                                    @else
-                                        <span class="text-muted">Tidak ada foto</span>
-                                    @endif
-                                </td>
+    @if ($produk->foto)
+        <img src="{{ asset('storage/' . $produk->foto) }}" 
+             alt="{{ $produk->nama_produk }}" 
+             style="max-width: 80px; max-height: 80px; object-fit: cover; border-radius: 5px;">
+    @else
+        <span class="text-muted">Tidak ada foto</span>
+    @endif
+</td>
                                 <td>
                                     <a href="{{ route('produk.show', $produk->id) }}" class="btn btn-info btn-sm">👁 Detail</a>
                                     <a href="{{ route('produk.edit', $produk->id) }}"

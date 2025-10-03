@@ -13,8 +13,13 @@ class Transaksi extends Model
     protected $table = 'transaksi'; 
 
     protected $fillable = [
-        'produk_id',
-        'jumlah',
         'total_harga',
+        'uang_bayar',
+        'kembalian',
+        
+
+        
+        
+
     ];
 }

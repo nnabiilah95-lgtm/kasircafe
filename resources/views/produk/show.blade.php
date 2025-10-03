@@ -28,13 +28,13 @@
                 <tr>
                     <th>Foto Produk</th>
                     <td>
-                        @if($produk->foto_produk)
-                            <img src="{{ asset('storage/' . $produk->foto_produk) }}" 
-                                 alt="{{ $produk->nama_produk }}" 
-                                 class="img-thumbnail" width="200">
-                        @else
-                            <span class="text-muted">Belum ada foto</span>
-                        @endif
+                         @if ($produk->foto)
+                        <img src="{{ asset('storage/' . $produk->foto) }}" 
+                            alt="{{ $produk->nama_produk }}" 
+                            style="max-width: 80px; max-height: 80px; object-fit: cover; border-radius: 5px;">
+                    @else
+                        <span class="text-muted">Tidak ada foto</span>
+                    @endif
                     </td>
                 </tr>
             </table>

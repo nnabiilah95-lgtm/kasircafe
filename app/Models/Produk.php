@@ -14,7 +14,7 @@ class Produk extends Model
 
     public function stok()
     {
-        return $this->hasMany(Stok::class, 'menu_id'); 
+        return $this->hasMany(Stok::class, 'produk_id'); 
         // kalau foreign key di migration pakai menu_id
         // kalau pakai produk_id → ganti jadi 'produk_id'
     }

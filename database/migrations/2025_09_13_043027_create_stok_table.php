@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stok', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('menu_id');
+            $table->unsignedBigInteger('produk_id');
             $table->enum('jenis', ['masuk', 'keluar']); // masuk = tambah stok, keluar = pengurangan
             $table->integer('jumlah');
             $table->string('keterangan')->nullable();            

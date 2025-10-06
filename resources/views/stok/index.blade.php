@@ -1,4 +1,3 @@
-{{-- resources/views/stok/index.blade.php --}}
 @extends('layouts.app')
 
 @section('title','Stok Produk')
@@ -19,25 +18,39 @@
                 <th>Nama Menu</th>
                 <th>Stok Tersisa</th>
                 <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($stok as $i => $m)
+            @forelse($stok as $i => $m)
             <tr>
-                <td>{{ $i+1 }}</td>
-                <td>{{ $item->produk->nama_produk ?? '-' }}</td>
-                <td>{{ $m->total_stok }}</td>
+                <td>{{ $i + 1 }}</td>
+                {{-- ambil nama produk dari relasi --}}
+                <td>{{ $m->produk->nama_produk ?? '-' }}</td>
+                {{-- jumlah stok dari field jumlah --}}
+                <td>{{ $m->jumlah }}</td>
                 <td>
-                    @if($m->total_stok > 10)
+                    @if($m->jumlah > 10)
                         <span class="badge bg-success">Aman</span>
-                    @elseif($m->total_stok > 0)
+                    @elseif($m->jumlah > 0)
                         <span class="badge bg-warning text-dark">Menipis</span>
                     @else
                         <span class="badge bg-danger">Habis</span>
                     @endif
                 </td>
+                <td>
+                <form action="{{ route('stok.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                </form>
+            </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="4">Belum ada data stok</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

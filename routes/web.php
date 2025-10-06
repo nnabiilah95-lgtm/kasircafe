@@ -9,6 +9,7 @@ use App\Http\Controllers\StokController;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,11 +33,16 @@ Route::resource('produk', ProdukController::class);
 
 
 
-
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
 Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
-Route::get('/transaksi/nota/{id}', [TransaksiController::class, 'nota'])->name('transaksi.nota');
-Route::resource('transaksi', TransaksiController::class);
+
+Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
+
+
+
+
 
 
 Route::resource('stok/index/create/store', StokController::class)->only(['index','create','store']);

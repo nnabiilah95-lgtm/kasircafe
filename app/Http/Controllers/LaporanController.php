@@ -22,4 +22,11 @@ class LaporanController extends Controller
 
     return view('laporan.index', compact('transaksi'));
 }
+public function destroy($id)
+{
+    $laporan = Transaksi::findOrFail($id);
+    $laporan->delete();
+    return redirect()->route('laporan.index')->with('success', 'Data berhasil dihapus');
+}
+
 }

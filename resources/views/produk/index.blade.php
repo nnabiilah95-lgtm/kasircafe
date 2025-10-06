@@ -40,7 +40,7 @@
     @if ($produk->foto)
         <img src="{{ asset('storage/' . $produk->foto) }}" 
              alt="{{ $produk->nama_produk }}" 
-             style="max-width: 80px; max-height: 80px; object-fit: cover; border-radius: 5px;">
+             style="max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 5px;">
     @else
         <span class="text-muted">Tidak ada foto</span>
     @endif
@@ -64,4 +64,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Kasir Nescaffe</title>
+    <title>Login - Kasir Nescaffé</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -60,7 +60,7 @@
     <div class="overlay"></div>
 
     <div class="container text-center">
-        <h1>Kasir Nescaffe</h1>
+        <h1>Kasir Nescaffé</h1>
         <div class="login-box mx-auto">
             <h3 class="mb-4">Login</h3>
 

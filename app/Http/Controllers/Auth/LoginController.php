@@ -24,32 +24,27 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+{
+    $credentials = $request->only('email', 'password');
 
-        $credentials = $request->only('email', 'password');
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate(); // ⬅️ WAJIB supaya session login valid
 
-        $user = User::where('email', $credentials['email'])->first();
+        $role = Auth::user()->role;
 
-        if ($user && Hash::check($credentials['password'], $user->password)) {
-            Auth::login($user);
-
-            if ($user->role === 'administrator') {
-                return redirect('/administrator');
-            } else if ($user->role === 'kasir') {
-                return redirect('/kasir');
-            }
-
-            return redirect($this->redirectTo);
+        if ($role === 'admin') {
+            return redirect()->intended('/admin/dashboard');
+        } elseif ($role === 'kasir') {
+            return redirect()->intended('/kasir/dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau Password salah',
-        ])->onlyInput('email');
+        Auth::logout();
+        return redirect()->back()->withErrors(['role' => 'Role tidak dikenali']);
     }
+
+    return redirect()->back()->withErrors(['email' => 'Email atau password salah']);
+}
+
 
     public function logout(Request $request)
     {

@@ -39,6 +39,29 @@ return view('stok.create', compact('produk'));
 
     return redirect()->route('stok.index')->with('success', 'Data stok berhasil ditambahkan');
 }
+public function edit($id)
+{
+    $stok = Stok::findOrFail($id);
+    $produk = Produk::all();
+    return view('stok.edit', compact('stok', 'produk'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'produk_id' => 'required',
+        'jumlah' => 'required|integer|min:0',
+    ]);
+
+    $stok = \App\Models\Stok::findOrFail($id);
+    $stok->update([
+        'produk_id' => $request->produk_id,
+        'jumlah' => $request->jumlah,
+    ]);
+
+    return redirect()->route('stok.index')->with('success', 'Stok berhasil diperbarui');
+}
+
 public function destroy($id)
 {
     $stok = Stok::findOrFail($id);

@@ -30,21 +30,23 @@
                 {{-- jumlah stok dari field jumlah --}}
                 <td>{{ $m->jumlah }}</td>
                 <td>
-                    @if($m->jumlah > 10)
-                        <span class="badge bg-success">Aman</span>
-                    @elseif($m->jumlah > 0)
+                    @if ($m->jumlah == 0)
+                        <span class="badge bg-danger">Habis</span>
+                    @elseif ($m->jumlah <= 50)
                         <span class="badge bg-warning text-dark">Menipis</span>
                     @else
-                        <span class="badge bg-danger">Habis</span>
+                        <span class="badge bg-success">Aman</span>
                     @endif
                 </td>
+
                 <td>
-                <form action="{{ route('stok.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                </form>
-            </td>
+                    <a href="{{ route('stok.edit', $m->id) }}" class="btn btn-warning btn-sm d-inline-block">Edit</a>
+                    <form action="{{ route('stok.destroy', $m->id) }}" method="POST" class="d-inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-danger btn-sm btn-delete">Hapus</button>
+                    </form>
+                </td>
             </tr>
             @empty
             <tr>
@@ -54,4 +56,28 @@
         </tbody>
     </table>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            let form = this.closest('form');
+
+            Swal.fire({
+                title: 'Yakin hapus?',
+                text: "Data yang dihapus tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    });
+</script>
+
 @endsection

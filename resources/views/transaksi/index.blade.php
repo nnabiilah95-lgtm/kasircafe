@@ -31,7 +31,7 @@
                 <tbody>
                     @forelse ($transaksi as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
+                            <td>{{ $loop->iteration }}</td> <!-- nomor urut -->
                             <td>{{ $item->kode_invoice }}</td>
                             <td>Rp{{ number_format($item->total_harga, 0, ',', '.') }}</td>
                             <td>Rp{{ number_format($item->uang_bayar, 0, ',', '.') }}</td>
@@ -45,6 +45,17 @@
                     @endforelse
                 </tbody>
             </table>
+            @if(session('success'))
+    <script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: "{{ session('success') }}",
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+
         </div>
     </div>
 </div>

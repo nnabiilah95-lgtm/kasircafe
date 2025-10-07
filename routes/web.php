@@ -12,17 +12,26 @@ use App\Models\Produk;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\LaporanController;
+use App\Http\Middleware\CheckRole;
+use Illuminate\Auth\Events\Login;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
+// Form login (GET)
+Route::get('/login', [LoginController::class, 'showLogin'])->name('login.form');
+
+// Proses login (POST)
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+// Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('home.index');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard');
 
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
 Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
@@ -56,10 +65,17 @@ Route::get('/stok', [StokController::class, 'index'])->name('stok.index');
 Route::resource('stok', StokController::class);
 
 // Role views
-Route::group(['middleware' => ['auth','checkrole:admin']], function() {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
+    Route::resource('produk', ProdukController::class);
+    Route::resource('transaksi', TransaksiController::class);
+
+    Route::resource('stok', StokController::class);
+    Route::resource('laporan', LaporanController::class);
 });
-Route::group(['middleware' => ['auth','checkrole:kasir']], function() {
-    Route::get('/kasir/dashboard', [KasirController::class, 'index'])->name('kasir.dashboard');
+
+Route::middleware(['auth', CheckRole::class . ':kasir'])->group(function () {
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('laporan', LaporanController::class);
+
 });
 

@@ -12,7 +12,7 @@
         <div class="mb-3">
             <label for="produk" class="form-label">Pilih Produk:</label>
             <select id="produk" class="form-select">
-                <option value="">-- Pilih Produk --</option>
+                <option value="">-- 🛒 Pilih Produk --</option>
                 @foreach($produk as $item)
                     <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">
                         {{ $item->nama_produk }} - Rp{{ number_format($item->harga, 0, ',', '.') }}
@@ -82,20 +82,23 @@
         const harga = parseInt(selected.dataset.harga);
         const id = selected.value;
 
-        // Hapus row lama (biar 1 produk per transaksi sesuai migration)
-        tabelBody.innerHTML = '';
-        produkDipilih = [];
-        totalHarga = 0;
+       
 
         // Buat row baru
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${nama}</td>
-            <td>Rp${harga.toLocaleString("id-ID")}</td>
-            <td>1</td>
-            <td class="subtotal" data-subtotal="${harga}">${harga}</td>
-            <td><button type="button" class="btn btn-danger btn-sm btnHapus">X</button></td>
-        `;
+    <td>
+        ${nama}
+        <input type="hidden" name="produk_id[]" value="${id}">
+    </td>
+    <td>Rp${harga.toLocaleString("id-ID")}</td>
+    <td>
+        1
+        <input type="hidden" name="jumlah[]" value="1">
+    </td>
+    <td class="subtotal" data-subtotal="${harga}">${harga}</td>
+    <td><button type="button" class="btn btn-danger btn-sm btnHapus">X</button></td>
+`;
         tabelBody.appendChild(row);
 
         // Simpan produk id
@@ -147,5 +150,8 @@
         // Submit form
         document.getElementById('formTransaksi').submit();
     });
+
 </script>
+
+
 @endsection

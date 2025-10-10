@@ -2,17 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Produk;
+use App\Models\Transaksi;
+use App\Models\Stok;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Contoh data dummy transaksi 7 hari terakhir
-        $tanggalMingguan = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-        $transaksiMingguan = [5, 7, 3, 6, 8, 4, 9]; // jumlah transaksi tiap hari
+        // Hitung total menu
+        $totalMenu = Produk::count();
 
-        // Kirim data ke view
-        return view('dashboard', compact('tanggalMingguan', 'transaksiMingguan'));
+        // Hitung transaksi hari ini
+        $transaksiHariIni = Transaksi::whereDate('created_at', Carbon::today())->count();
+
+        // Hitung stok menipis
+        $stokMenipis = Stok::where('jumlah', '<', 10)->count(); // ganti <10 sesuai kebutuhan
+
+        // Ambil data transaksi 7 hari terakhir
+        $tanggalMingguan = [];
+        $dataMingguan = [];
+
+        for ($i = 6; $i >= 0; $i--) {
+            $tanggal = Carbon::today()->subDays($i)->format('d M');
+            $jumlah = Transaksi::whereDate('created_at', Carbon::today()->subDays($i))->count();
+
+            $tanggalMingguan[] = $tanggal;
+            $dataMingguan[] = $jumlah;
+        }
+
+        return view('dashboard', compact(
+            'totalMenu',
+            'transaksiHariIni',
+            'stokMenipis',
+            'tanggalMingguan',
+            'dataMingguan'
+        ));
     }
 }

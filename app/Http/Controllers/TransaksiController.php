@@ -10,7 +10,7 @@ class TransaksiController extends Controller
 {
   public function index()
 {
-    $transaksi = \App\Models\Transaksi::latest()->get();
+    $transaksi = \App\Models\Transaksi::orderBy('id', 'asc')->get();
     return view('transaksi.index', compact('transaksi'));
 }
 public function create() {
@@ -37,5 +37,6 @@ public function create() {
     ]);
 
     return redirect()->route('laporan.index')->with('success', 'Transaksi berhasil disimpan!');
+
 }
 }

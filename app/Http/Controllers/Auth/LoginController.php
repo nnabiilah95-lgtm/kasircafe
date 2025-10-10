@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     public function __construct()
     {
@@ -20,31 +20,28 @@ class LoginController extends Controller
 
     public function showLogin()
     {
-        return view('auth.login'); // pastikan ada file resources/views/auth/login.blade.php
+        return view('auth.login');
     }
 
     public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
+    {
+        $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate(); // ⬅️ WAJIB supaya session login valid
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        $role = Auth::user()->role;
+            $role = Auth::user()->role;
 
-        if ($role === 'admin') {
-            return redirect()->intended('/admin/dashboard');
-        } elseif ($role === 'kasir') {
-            return redirect()->intended('/kasir/dashboard');
+            if ($role === 'admin' || $role === 'kasir') {
+                return redirect()->intended('/dashboard');
+            }
+
+            Auth::logout();
+            return redirect()->back()->withErrors(['role' => 'Role tidak dikenali']);
         }
 
-        Auth::logout();
-        return redirect()->back()->withErrors(['role' => 'Role tidak dikenali']);
+        return redirect()->back()->withErrors(['email' => 'Email atau password salah']);
     }
-
-    return redirect()->back()->withErrors(['email' => 'Email atau password salah']);
-}
-
 
     public function logout(Request $request)
     {
@@ -54,4 +51,15 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+    protected function authenticated($request, $user)
+{
+    if ($user->role == 'admin') {
+        return redirect('/dashboard');
+    }
+
+    if ($user->role == 'kasir') {
+        return redirect('/transaksi');
+    }
+}
+
 }

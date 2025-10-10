@@ -77,13 +77,13 @@
                 <div class="mb-3 text-start">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" name="email" class="form-control" id="email"
-                        placeholder="admin@mail.com" required>
+                        placeholder="Email" required>
                 </div>
 
                 <div class="mb-3 text-start">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="password"
-                        placeholder="••••••••" required>
+                        placeholder="Password" required>
                 </div>
 
                 <button type="submit" class="btn btn-login w-100 text-white">Login</button>

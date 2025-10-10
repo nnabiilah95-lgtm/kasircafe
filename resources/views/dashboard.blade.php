@@ -27,7 +27,7 @@
     <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
-                <h5>Stok Menipis</h5>
+                <h5>Stok Habis</h5>
                 <h2>{{ $stokMenipis }}</h2>
             </div>
         </div>
